@@ -200,9 +200,9 @@ function createServiceCard(service) {
 
 function createContractorCard(contractor) {
     return `
-        <div class="contractor-card" onclick="showContractorDetails(${contractor.id})">
+        <div class="contractor-card">
             <div class="card-header">
-                <img src="${contractor.profileImage || '/api/placeholder/60/60'}" alt="${contractor.name}" class="card-image">
+                <img src="${contractor.profileImage || '/api/placeholder/70/70'}" alt="${contractor.name}" class="card-image">
                 <div class="card-info">
                     <h3>${contractor.name}</h3>
                     <p>${contractor.specialty}</p>
@@ -223,6 +223,17 @@ function createContractorCard(contractor) {
                     ${contractor.isInsured ? '<span class="badge badge-licensed">Insured</span>' : ''}
                 </div>
             </div>
+            <div class="card-actions">
+                <button class="btn btn-primary btn-small" onclick="showContractorDetails(${contractor.id})">
+                    👁️ View Details
+                </button>
+                <button class="btn btn-success btn-small" onclick="contactContractor(${contractor.id})">
+                    📧 Contact
+                </button>
+                <button class="btn btn-outline btn-small" onclick="callContractor('${contractor.phone}')">
+                    📞 Call
+                </button>
+            </div>
         </div>
     `;
 }
@@ -231,7 +242,7 @@ function createLaborerCard(laborer) {
     return `
         <div class="laborer-card">
             <div class="card-header">
-                <img src="${laborer.profileImage || '/api/placeholder/60/60'}" alt="${laborer.name}" class="card-image">
+                <img src="${laborer.profileImage || '/api/placeholder/70/70'}" alt="${laborer.name}" class="card-image">
                 <div class="card-info">
                     <h3>${laborer.name}</h3>
                     <p>${laborer.specialty}</p>
@@ -247,9 +258,16 @@ function createLaborerCard(laborer) {
                     <span>${laborer.rating} (${laborer.reviewCount} reviews)</span>
                 </div>
                 <span class="badge ${laborer.isAvailable ? 'badge-available' : 'badge-busy'}">
-                    ${laborer.isAvailable ? 'Available' : 'Busy'}
+                    ${laborer.isAvailable ? '✅ Available' : '⏰ Busy'}
                 </span>
             </div>
+            ${laborer.isAvailable ? `
+                <div class="card-actions">
+                    <button class="btn btn-success btn-small" onclick="contactLaborer('${laborer.name}')">
+                        📧 Contact Now
+                    </button>
+                </div>
+            ` : ''}
         </div>
     `;
 }
@@ -486,10 +504,32 @@ function showNotification(message, type) {
     }, 5000);
 }
 
+// Contact functions
+function contactContractor(contractorId) {
+    const contractor = currentData.contractors.find(c => c.id === contractorId);
+    if (!contractor) return;
+    
+    const subject = encodeURIComponent(`Inquiry about ${contractor.specialty} services`);
+    const body = encodeURIComponent(`Hello ${contractor.name},\n\nI am interested in your ${contractor.specialty} services. Please contact me to discuss my project requirements.\n\nBest regards`);
+    
+    window.location.href = `mailto:${contractor.email}?subject=${subject}&body=${body}`;
+}
+
+function callContractor(phone) {
+    window.location.href = `tel:${phone}`;
+}
+
+function contactLaborer(laborerName) {
+    showSuccess(`Contact form would open for ${laborerName}. In a real application, this would open a contact modal or redirect to a contact page.`);
+}
+
 // Global functions for button clicks
 window.showSection = showSection;
 window.showContractorDetails = showContractorDetails;
 window.showProjectDetails = showProjectDetails;
+window.contactContractor = contactContractor;
+window.callContractor = callContractor;
+window.contactLaborer = contactLaborer;
 
 // Add animation keyframes
 const style = document.createElement('style');
