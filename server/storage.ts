@@ -15,6 +15,8 @@ import {
   type ContactSubmission,
   type InsertContactSubmission
 } from "@shared/schema";
+import { db } from "./db";
+import { eq, like, and } from "drizzle-orm";
 
 export interface IStorage {
   // Services
@@ -334,4 +336,56 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export class DatabaseStorage implements IStorage {
+  async getServices(): Promise<Service[]> {
+    return await db.select().from(services);
+  }
+
+  async getServicesByCategory(category: string): Promise<Service[]> {
+    return await db.select().from(services).where(eq(services.category, category));
+  }
+
+  async getContractors(): Promise<Contractor[]> {
+    return await db.select().from(contractors);
+  }
+
+  async getContractor(id: number): Promise<Contractor | undefined> {
+    const result = await db.select().from(contractors).where(eq(contractors.id, id));
+    return result[0] || undefined;
+  }
+
+  async getContractorsBySpecialty(specialty: string): Promise<Contractor[]> {
+    return await db.select().from(contractors).where(like(contractors.specialty, `%${specialty}%`));
+  }
+
+  async getContractorsByLocation(location: string): Promise<Contractor[]> {
+    return await db.select().from(contractors).where(like(contractors.location, `%${location}%`));
+  }
+
+  async getLaborers(): Promise<Laborer[]> {
+    return await db.select().from(laborers);
+  }
+
+  async getLaborersBySpecialty(specialty: string): Promise<Laborer[]> {
+    return await db.select().from(laborers).where(like(laborers.specialty, `%${specialty}%`));
+  }
+
+  async getAvailableLaborers(): Promise<Laborer[]> {
+    return await db.select().from(laborers).where(eq(laborers.isAvailable, true));
+  }
+
+  async getProjects(): Promise<Project[]> {
+    return await db.select().from(projects);
+  }
+
+  async getProjectsByContractor(contractorId: number): Promise<Project[]> {
+    return await db.select().from(projects).where(eq(projects.contractorId, contractorId));
+  }
+
+  async createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission> {
+    const result = await db.insert(contactSubmissions).values(submission).returning();
+    return result[0];
+  }
+}
+
+export const storage = new DatabaseStorage();
