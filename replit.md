@@ -23,7 +23,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Architecture Pattern
 The application follows a monorepo structure with clear separation between client, server, and shared code:
-- **Client**: React SPA in the `client/` directory
+- **Client**: Vanilla HTML/CSS/JS SPA in the `client/` directory
 - **Server**: Express API server in the `server/` directory  
 - **Shared**: Common schemas and types in the `shared/` directory
 
@@ -49,17 +49,17 @@ RESTful API endpoints organized by entity:
 - `/api/contact` - Contact form submissions
 
 ### Frontend Architecture
-- **Component Structure**: Organized by feature with reusable UI components
-- **State Management**: Server state via TanStack Query, local state via React hooks
-- **Routing**: File-based routing with wouter for SPA navigation
-- **Styling**: Utility-first CSS with Tailwind and design system components
+- **Component Structure**: Organized as a single-page application with section-based navigation
+- **State Management**: Local JavaScript state management with API data fetching
+- **Routing**: Hash-based routing with vanilla JavaScript navigation
+- **Styling**: Custom CSS with modern design patterns and responsive layouts
 
 ## Data Flow
 
-1. **Client Requests**: React components make API calls through TanStack Query
+1. **Client Requests**: Vanilla JavaScript makes fetch API calls to backend endpoints
 2. **API Layer**: Express routes handle requests and delegate to storage layer
 3. **Storage Layer**: Storage implementation performs database operations via Drizzle ORM
-4. **Response**: Data flows back through the layers with type safety maintained throughout
+4. **Response**: Data flows back through the layers with JSON responses rendered via DOM manipulation
 
 ### Key Data Entities
 - **Services**: Construction services categorized by type (residential, commercial, industrial)
@@ -72,10 +72,8 @@ RESTful API endpoints organized by entity:
 
 ### Core Dependencies
 - **Database**: Neon Database (serverless PostgreSQL)
-- **UI Library**: Radix UI for accessible component primitives
-- **Validation**: Zod for schema validation
-- **Date Handling**: date-fns for date utilities
-- **Icons**: Lucide React for consistent iconography
+- **Validation**: Zod for schema validation on the backend
+- **No External UI Libraries**: Pure CSS and vanilla JavaScript implementation
 
 ### Development Dependencies
 - **Build Tool**: Vite for fast development and optimized builds
@@ -85,12 +83,12 @@ RESTful API endpoints organized by entity:
 ## Deployment Strategy
 
 ### Build Process
-1. **Client Build**: Vite builds the React application to `dist/public`
+1. **Client Build**: Static HTML/CSS/JS files served directly from `client/` directory
 2. **Server Build**: ESBuild bundles the Express server to `dist/index.js`
 3. **Database**: Drizzle migrations are applied via `db:push` command
 
 ### Environment Configuration
-- **Development**: Uses Vite dev server with HMR and development middleware
+- **Development**: Uses Vite dev server for hot reloading of static files
 - **Production**: Serves static files from Express with proper error handling
 - **Database**: Requires `DATABASE_URL` environment variable for PostgreSQL connection
 
