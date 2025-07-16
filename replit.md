@@ -4,6 +4,8 @@
 
 BuildPro Connect is a full-stack web application that connects property owners with professional construction contractors and skilled laborers. The platform facilitates finding and hiring construction professionals for residential, commercial, and industrial projects.
 
+**Current Implementation**: The project has been rebuilt using vanilla HTML, CSS, and JavaScript with a Node.js/Express backend and PostgreSQL database. This provides a lightweight, fast-loading web application with full functionality.
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -11,14 +13,13 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### Technology Stack
-- **Frontend**: React 18 with TypeScript, using Vite as the build tool
-- **Styling**: Tailwind CSS with shadcn/ui component library
-- **Backend**: Express.js with TypeScript
+- **Frontend**: HTML5, CSS3, and vanilla JavaScript
+- **Styling**: Custom CSS with modern design patterns and responsive layouts
+- **Backend**: Node.js with Express.js and TypeScript
 - **Database**: PostgreSQL with Drizzle ORM
-- **State Management**: TanStack Query (React Query) for server state
-- **Routing**: Wouter for client-side routing
-- **Forms**: React Hook Form with Zod validation
-- **UI Components**: Radix UI primitives with custom styling
+- **No Frontend Framework**: Pure JavaScript for DOM manipulation and API calls
+- **Forms**: Native HTML5 forms with JavaScript validation
+- **UI Components**: Custom CSS components with modern styling
 
 ### Architecture Pattern
 The application follows a monorepo structure with clear separation between client, server, and shared code:
