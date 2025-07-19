@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BuildPro Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .contact-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-methods {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .contact-method {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-method-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-method-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .contact-method h3 {
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .contact-method p {
+            color: #666;
+            margin: 0.5rem 0;
+        }
+        
+        .contact-form-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .form-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .form-tab.active {
+            color: #e74c3c;
+            border-bottom-color: #e74c3c;
+        }
+        
+        .form-tab:hover {
+            color: #e74c3c;
+        }
+        
+        .form-content {
+            display: none;
+        }
+        
+        .form-content.active {
+            display: block;
+        }
+        
+        .map-section {
+            margin-top: 4rem;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-placeholder {
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .map-info {
+            padding: 2rem;
+        }
+        
+        .office-locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .office-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .office-card h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .office-card p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .emergency-contact {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .emergency-contact h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .emergency-phone {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+        
+        .emergency-phone a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-hammer"></i>
+                <span>BuildPro Connect</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contractors.html" class="nav-link">Contractors</a></li>
+                <li><a href="workers.html" class="nav-link">Workers</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team for all your construction needs</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-header">
+                            <div class="contact-method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>Call us directly</p>
+                            </div>
+                        </div>
+                        <p><strong>Main Office:</strong> +1 (555) 123-4567</p>
+                        <p><strong>Emergency:</strong> +1 (555) 987-6543</p>
+                        <p><strong>Fax:</strong> +1 (555) 123-4568</p>
+                        <p><strong>Hours:</strong> Mon-Fri 8AM-6PM, Sat 9AM-4PM</p>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-header">
+                            <div class="contact-method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3>Email</h3>
+                                <p>Send us a message</p>
+                            </div>
+                        </div>
+                        <p><strong>General:</strong> info@buildproconnect.com</p>
+                        <p><strong>Quotes:</strong> quotes@buildproconnect.com</p>
+                        <p><strong>Support:</strong> support@buildproconnect.com</p>
+                        <p><strong>Partnerships:</strong> partnerships@buildproconnect.com</p>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-header">
+                            <div class="contact-method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h3>Office</h3>
+                                <p>Visit our headquarters</p>
+                            </div>
+                        </div>
+                        <p><strong>Address:</strong></p>
+                        <p>123 Construction Avenue<br>
+                        Building City, BC 12345<br>
+                        United States</p>
+                        <p><strong>Parking:</strong> Free parking available</p>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-header">
+                            <div class="contact-method-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div>
+                                <h3>Social Media</h3>
+                                <p>Follow us online</p>
+                            </div>
+                        </div>
+                        <div class="social-links" style="justify-content: flex-start;">
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                        <p style="margin-top: 1rem;">Stay updated with our latest projects and news!</p>
+                    </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <div class="form-tabs">
+                        <button class="form-tab active" onclick="showForm('general')">General Inquiry</button>
+                        <button class="form-tab" onclick="showForm('quote')">Request Quote</button>
+                        <button class="form-tab" onclick="showForm('consultation')">Free Consultation</button>
+                    </div>
+
+                    <!-- General Inquiry Form -->
+                    <div id="general-form" class="form-content active">
+                        <form class="contact-form" id="generalForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" placeholder="First Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="email" placeholder="Email Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" placeholder="Phone Number" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select required>
+                                    <option value="">Select Inquiry Type</option>
+                                    <option value="general">General Information</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="career">Career Opportunities</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Your Message" rows="5" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" required>
+                                    <span class="checkmark"></span>
+                                    I agree to receive communications from BuildPro Connect
+                                </label>
+                            </div>
+                            <button type="submit" class="primary-btn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Quote Request Form -->
+                    <div id="quote-form" class="form-content">
+                        <form class="contact-form" id="quoteForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" placeholder="First Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="email" placeholder="Email Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" placeholder="Phone Number" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select required>
+                                    <option value="">Select Service Type</option>
+                                    <option value="residential">Residential Construction</option>
+                                    <option value="commercial">Commercial Projects</option>
+                                    <option value="renovation">Renovation & Remodeling</option>
+                                    <option value="design">Design & Planning</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Project Location" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Estimated Budget" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Timeline" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Project Description (Include size, requirements, etc.)" rows="5" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" required>
+                                    <span class="checkmark"></span>
+                                    I agree to receive a detailed quote and follow-up communications
+                                </label>
+                            </div>
+                            <button type="submit" class="primary-btn">
+                                <i class="fas fa-calculator"></i> Request Quote
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Consultation Form -->
+                    <div id="consultation-form" class="form-content">
+                        <form class="contact-form" id="consultationForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" placeholder="First Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="email" placeholder="Email Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" placeholder="Phone Number" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select required>
+                                    <option value="">Preferred Consultation Type</option>
+                                    <option value="phone">Phone Consultation</option>
+                                    <option value="video">Video Call</option>
+                                    <option value="office">Office Visit</option>
+                                    <option value="site">Site Visit</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="date" placeholder="Preferred Date" required>
+                                </div>
+                                <div class="form-group">
+                                    <select required>
+                                        <option value="">Preferred Time</option>
+                                        <option value="morning">Morning (9AM-12PM)</option>
+                                        <option value="afternoon">Afternoon (1PM-4PM)</option>
+                                        <option value="evening">Evening (5PM-7PM)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Brief description of your project and what you'd like to discuss" rows="4" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" required>
+                                    <span class="checkmark"></span>
+                                    I agree to schedule a consultation and receive follow-up communications
+                                </label>
+                            </div>
+                            <button type="submit" class="primary-btn">
+                                <i class="fas fa-calendar-check"></i> Schedule Consultation
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="emergency-contact">
+                <h3><i class="fas fa-exclamation-triangle"></i> Emergency Contact</h3>
+                <p>For urgent construction emergencies or after-hours support</p>
+                <div class="emergency-phone">
+                    <a href="tel:+15559876543">+1 (555) 987-6543</a>
+                </div>
+                <p>Available 24/7 for emergency situations</p>
+            </div>
+
+            <!-- Map Section -->
+            <div class="map-section">
+                <div class="map-placeholder">
+                    <i class="fas fa-map"></i>
+                    <span style="margin-left: 1rem;">Interactive Map Coming Soon</span>
+                </div>
+                <div class="map-info">
+                    <h3>Our Office Locations</h3>
+                    <div class="office-locations">
+                        <div class="office-card">
+                            <h4>Main Office</h4>
+                            <p><strong>Address:</strong></p>
+                            <p>123 Construction Avenue<br>
+                            Building City, BC 12345</p>
+                            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                            <p><strong>Hours:</strong> Mon-Fri 8AM-6PM</p>
+                        </div>
+                        <div class="office-card">
+                            <h4>Design Center</h4>
+                            <p><strong>Address:</strong></p>
+                            <p>456 Design Street<br>
+                            Creative District, BC 12346</p>
+                            <p><strong>Phone:</strong> +1 (555) 234-5678</p>
+                            <p><strong>Hours:</strong> Mon-Fri 9AM-5PM</p>
+                        </div>
+                        <div class="office-card">
+                            <h4>Project Management</h4>
+                            <p><strong>Address:</strong></p>
+                            <p>789 Project Lane<br>
+                            Business Park, BC 12347</p>
+                            <p><strong>Phone:</strong> +1 (555) 345-6789</p>
+                            <p><strong>Hours:</strong> Mon-Fri 8AM-6PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-hammer"></i>
+                        <span>BuildPro Connect</span>
+                    </div>
+                    <p>Connecting you with the best construction professionals.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contractors.html">Contractors</a></li>
+                        <li><a href="workers.html">Workers</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p>info@buildproconnect.com</p>
+                    <p>123 Construction Ave, Building City, BC 12345</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BuildPro Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form tab functionality
+        function showForm(formType) {
+            // Hide all forms
+            document.querySelectorAll('.form-content').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.form-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected form
+            document.getElementById(formType + '-form').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Form submission handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const forms = ['generalForm', 'quoteForm', 'consultationForm'];
+            
+            forms.forEach(formId => {
+                const form = document.getElementById(formId);
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        
+                        // Get form data
+                        const formData = new FormData(form);
+                        const data = Object.fromEntries(formData);
+                        
+                        // Show success message
+                        alert('Thank you for your message! We will get back to you soon.');
+                        
+                        // Reset form
+                        form.reset();
+                    });
+                }
+            });
+        });
+
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+    </script>
+</body>
+</html> 

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - BuildPro Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .projects-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+        
+        .filter-section {
+            background: #f8f9fa;
+            padding: 40px 0;
+        }
+        
+        .filter-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .filter-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+        
+        .filter-form input,
+        .filter-form select {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .filter-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+        }
+        
+        .project-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .status-in-progress {
+            background: #f39c12;
+        }
+        
+        .status-completed {
+            background: #27ae60;
+        }
+        
+        .status-planning {
+            background: #3498db;
+        }
+        
+        .project-body {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .project-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .project-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .meta-item i {
+            color: #e74c3c;
+            width: 16px;
+        }
+        
+        .progress-section {
+            margin: 1rem 0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .project-team {
+            margin: 1rem 0;
+        }
+        
+        .team-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-members {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .team-member {
+            background: #f8f9fa;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .loading i {
+            font-size: 2rem;
+            color: #e74c3c;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .project-detail-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .detail-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 0.5rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e74c3c;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #e74c3c;
+            border-radius: 50%;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .timeline-content {
+            color: #666;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-hammer"></i>
+                <span>BuildPro Connect</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contractors.html" class="nav-link">Contractors</a></li>
+                <li><a href="workers.html" class="nav-link">Workers</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="projects-hero">
+        <div class="container">
+            <h1>Our Projects</h1>
+            <p>Explore our portfolio of completed and ongoing construction projects</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-container">
+                <h2>Filter Projects</h2>
+                <form class="filter-form" id="filterForm">
+                    <input type="text" placeholder="Search projects" id="searchQuery">
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="residential">Residential</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="industrial">Industrial</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="planning">Planning</option>
+                    </select>
+                    <button type="submit" class="filter-btn">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects">
+        <div class="container">
+            <div id="projectsGrid" class="projects-grid">
+                <!-- Projects will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content" style="max-width: 1000px; max-height: 90vh; overflow-y: auto;">
+            <span class="close" onclick="closeModal('projectModal')">&times;</span>
+            <div id="projectDetail">
+                <!-- Project details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-hammer"></i>
+                        <span>BuildPro Connect</span>
+                    </div>
+                    <p>Connecting you with the best construction professionals.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contractors.html">Contractors</a></li>
+                        <li><a href="workers.html">Workers</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p>info@buildproconnect.com</p>
+                    <p>123 Construction Ave, Building City, BC 12345</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BuildPro Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allProjects = [];
+        let filteredProjects = [];
+
+        // Load projects on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjects();
+            setupFilterForm();
+        });
+
+        // Load all projects
+        async function loadProjects() {
+            try {
+                showLoading();
+                const response = await fetch('/api/projects');
+                allProjects = await response.json();
+                filteredProjects = [...allProjects];
+                displayProjects();
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                showError('Failed to load projects');
+            }
+        }
+
+        // Display projects
+        function displayProjects() {
+            const grid = document.getElementById('projectsGrid');
+            
+            if (filteredProjects.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                        <h3>No projects found</h3>
+                        <p>Try adjusting your filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredProjects.map(project => `
+                <div class="project-card" onclick="viewProjectDetail(${project.id})">
+                    <div class="project-image">
+                        <i class="fas fa-building"></i>
+                        <span class="project-status status-${project.status.replace('-', '-')}">
+                            ${project.status.replace('-', ' ').toUpperCase()}
+                        </span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${project.location}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>${project.size}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>${project.budget}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-tag"></i>
+                                <span>${project.category}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-section">
+                            <div class="progress-text">
+                                <span>Progress</span>
+                                <span>${project.progress}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${project.progress}%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="project-team">
+                            <div class="team-title">Team Members</div>
+                            <div class="team-members">
+                                ${project.assigned_workers.length > 0 ? 
+                                    `<span class="team-member">${project.assigned_workers.length} workers assigned</span>` :
+                                    '<span class="team-member">No workers assigned</span>'
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="project-actions">
+                            <button class="btn-primary" onclick="event.stopPropagation(); viewProjectDetail(${project.id})">
+                                View Details
+                            </button>
+                            <button class="btn-secondary" onclick="event.stopPropagation(); contactProject(${project.id})">
+                                Contact
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Setup filter form
+        function setupFilterForm() {
+            document.getElementById('filterForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                filterProjects();
+            });
+        }
+
+        // Filter projects
+        function filterProjects() {
+            const query = document.getElementById('searchQuery').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const status = document.getElementById('statusFilter').value;
+            
+            filteredProjects = allProjects.filter(project => {
+                const matchesQuery = !query || 
+                    project.title.toLowerCase().includes(query) ||
+                    project.description.toLowerCase().includes(query);
+                
+                const matchesCategory = !category || 
+                    project.category === category;
+                
+                const matchesStatus = !status || 
+                    project.status === status;
+                
+                return matchesQuery && matchesCategory && matchesStatus;
+            });
+            
+            displayProjects();
+        }
+
+        // View project detail
+        async function viewProjectDetail(projectId) {
+            try {
+                const response = await fetch(`/api/projects/${projectId}`);
+                const project = await response.json();
+                
+                displayProjectDetail(project);
+                openModal('projectModal');
+            } catch (error) {
+                console.error('Error loading project details:', error);
+                alert('Failed to load project details');
+            }
+        }
+
+        // Display project detail
+        function displayProjectDetail(project) {
+            const detailDiv = document.getElementById('projectDetail');
+            
+            detailDiv.innerHTML = `
+                <div class="project-detail-grid">
+                    <div>
+                        <h2>${project.title}</h2>
+                        <p style="color: #666; margin-bottom: 2rem;">${project.description}</p>
+                        
+                        <div class="detail-section">
+                            <h3>Project Overview</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div>
+                                    <p><strong>Category:</strong> ${project.category}</p>
+                                    <p><strong>Size:</strong> ${project.size}</p>
+                                    <p><strong>Location:</strong> ${project.location}</p>
+                                    <p><strong>Budget:</strong> ${project.budget}</p>
+                                </div>
+                                <div>
+                                    <p><strong>Status:</strong> 
+                                        <span class="project-status status-${project.status.replace('-', '-')}">
+                                            ${project.status.replace('-', ' ').toUpperCase()}
+                                        </span>
+                                    </p>
+                                    <p><strong>Progress:</strong> ${project.progress}%</p>
+                                    <p><strong>Start Date:</strong> ${project.start_date}</p>
+                                    <p><strong>Expected Completion:</strong> ${project.expected_completion}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Progress Tracking</h3>
+                            <div class="progress-section">
+                                <div class="progress-text">
+                                    <span>Overall Progress</span>
+                                    <span>${project.progress}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${project.progress}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Project Timeline</h3>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date">${project.start_date}</div>
+                                    <div class="timeline-content">Project Started</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">${project.expected_completion}</div>
+                                    <div class="timeline-content">Expected Completion</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="detail-section">
+                            <h3>Client Information</h3>
+                            <p><strong>Name:</strong> ${project.client_name}</p>
+                            <p><strong>Email:</strong> ${project.client_email}</p>
+                            <p><strong>Phone:</strong> ${project.client_phone}</p>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Contractor</h3>
+                            ${project.contractor ? `
+                                <p><strong>Name:</strong> ${project.contractor.name}</p>
+                                <p><strong>Email:</strong> ${project.contractor.email}</p>
+                                <p><strong>Phone:</strong> ${project.contractor.phone}</p>
+                                <p><strong>Rating:</strong> ${project.contractor.rating}/5</p>
+                            ` : '<p>No contractor assigned</p>'}
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Team Members (${project.assigned_workers_detail ? project.assigned_workers_detail.length : 0})</h3>
+                            ${project.assigned_workers_detail && project.assigned_workers_detail.length > 0 ? 
+                                project.assigned_workers_detail.map(worker => `
+                                    <div style="background: white; padding: 1rem; margin: 1rem 0; border-radius: 5px;">
+                                        <h4>${worker.name}</h4>
+                                        <p><strong>Specialties:</strong> ${worker.specialties.join(', ')}</p>
+                                        <p><strong>Experience:</strong> ${worker.experience_years} years</p>
+                                        <p><strong>Rate:</strong> $${worker.hourly_rate}/hour</p>
+                                    </div>
+                                `).join('') : '<p>No workers assigned</p>'
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Contact project
+        function contactProject(projectId) {
+            // This would open a contact form or redirect to contact page
+            alert('Contact functionality would be implemented here');
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Loading and error functions
+        function showLoading() {
+            document.getElementById('projectsGrid').innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading projects...</p>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('projectsGrid').innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e74c3c; margin-bottom: 1rem;"></i>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+    </script>
+</body>
+</html> 

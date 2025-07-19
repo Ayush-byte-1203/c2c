@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildPro Connect - Professional Construction Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-hammer"></i>
+                <span>BuildPro Connect</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="contractors.html" class="nav-link">Contractors</a></li>
+                <li><a href="workers.html" class="nav-link">Workers</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><button class="cta-button" onclick="openModal('quoteModal')">Get Quote</button></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Building Your Vision Into Reality</h1>
+            <p>Professional construction services with over 15 years of experience in residential and commercial projects.</p>
+            <div class="hero-buttons">
+                <button class="primary-btn" onclick="openModal('quoteModal')">Get Free Quote</button>
+                <button class="secondary-btn" onclick="scrollToSection('projects')">View Projects</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="image-placeholder">
+                <i class="fas fa-building"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Residential Construction</h3>
+                    <p>Custom homes, renovations, and additions tailored to your lifestyle.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-building"></i>
+                    <h3>Commercial Projects</h3>
+                    <p>Office buildings, retail spaces, and industrial facilities.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Renovation & Remodeling</h3>
+                    <p>Transform your existing space with our renovation expertise.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-drafting-compass"></i>
+                    <h3>Design & Planning</h3>
+                    <p>Architectural design and project planning services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <p class="section-subtitle">Explore our latest construction projects showcasing quality craftsmanship and innovative design</p>
+            <div class="projects-grid">
+                <div class="project-card" onclick="viewProjectDetail(1)">
+                    <div class="project-image">
+                        <i class="fas fa-home"></i>
+                        <div class="project-status completed">Completed</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Modern Family Home</h3>
+                        <p class="project-description">A stunning 3,200 sq ft custom home featuring contemporary design with smart home integration. This luxury residence includes 4 bedrooms, 3.5 bathrooms, gourmet kitchen, and smart automation throughout.</p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>3,200 sq ft</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Suburban Area</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>$750,000</span>
+                            </div>
+                        </div>
+                        <div class="project-features">
+                            <span class="feature-tag">Smart Home</span>
+                            <span class="feature-tag">Luxury Kitchen</span>
+                            <span class="feature-tag">4 Bedrooms</span>
+                        </div>
+                        <span class="project-type">Residential</span>
+                        <button class="view-details-btn" onclick="event.stopPropagation(); viewProjectDetail(1)">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                    </div>
+                </div>
+                <div class="project-card" onclick="viewProjectDetail(2)">
+                    <div class="project-image">
+                        <i class="fas fa-building"></i>
+                        <div class="project-status in-progress">In Progress</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Office Complex</h3>
+                        <p class="project-description">A modern 15,000 sq ft office complex designed for tech companies. Features open floor plans, collaborative spaces, energy-efficient systems, and state-of-the-art amenities for the modern workforce.</p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>15,000 sq ft</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Downtown</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>$2,500,000</span>
+                            </div>
+                        </div>
+                        <div class="project-features">
+                            <span class="feature-tag">Open Floor Plan</span>
+                            <span class="feature-tag">Energy Efficient</span>
+                            <span class="feature-tag">Tech Ready</span>
+                        </div>
+                        <span class="project-type">Commercial</span>
+                        <button class="view-details-btn" onclick="event.stopPropagation(); viewProjectDetail(2)">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                    </div>
+                </div>
+                <div class="project-card" onclick="viewProjectDetail(3)">
+                    <div class="project-image">
+                        <i class="fas fa-store"></i>
+                        <div class="project-status completed">Completed</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Retail Center</h3>
+                        <p class="project-description">A multi-tenant retail development spanning 25,000 sq ft with modern storefronts, ample parking, and pedestrian-friendly design. Home to boutique shops, restaurants, and service businesses.</p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>25,000 sq ft</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Shopping District</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>$3,200,000</span>
+                            </div>
+                        </div>
+                        <div class="project-features">
+                            <span class="feature-tag">Multi-Tenant</span>
+                            <span class="feature-tag">Parking</span>
+                            <span class="feature-tag">Modern Design</span>
+                        </div>
+                        <span class="project-type">Commercial</span>
+                        <button class="view-details-btn" onclick="event.stopPropagation(); viewProjectDetail(3)">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="projects-cta">
+                <p>Want to see more projects?</p>
+                <a href="projects.html" class="primary-btn">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About BuildPro Connect</h2>
+                    <p>With over 15 years of experience in the construction industry, we've built our reputation on quality, reliability, and customer satisfaction. Our team of skilled professionals is committed to delivering exceptional results on every project.</p>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3>150+</h3>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat">
+                            <h3>15+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="stat">
+                            <h3>50+</h3>
+                            <p>Happy Clients</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p class="section-subtitle">Ready to start your construction project? Contact us for a free consultation and quote.</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                            <p>+1 (555) 987-6543 (Emergency)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@buildproconnect.com</p>
+                            <p>quotes@buildproconnect.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>123 Construction Ave, Building City, BC 12345</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Business Hours</h3>
+                            <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                            <p>Saturday: 9:00 AM - 4:00 PM</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-comments"></i>
+                        <div>
+                            <h3>Social Media</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="First Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Last Name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="">Select Contact Reason</option>
+                            <option value="quote">Request Quote</option>
+                            <option value="consultation">Free Consultation</option>
+                            <option value="project">Project Inquiry</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" required>
+                            <span class="checkmark"></span>
+                            I agree to receive communications from BuildPro Connect
+                        </label>
+                    </div>
+                    <button type="submit" class="primary-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-hammer"></i>
+                        <span>BuildPro Connect</span>
+                    </div>
+                    <p>Building excellence, one project at a time.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="contractors.html">Contractors</a></li>
+                        <li><a href="workers.html">Workers</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="services.html">Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p>info@buildproconnect.com</p>
+                    <p>123 Construction Ave, Building City, BC 12345</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BuildPro Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('quoteModal')">&times;</span>
+            <h2>Get Your Free Quote</h2>
+            <form id="quoteForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Select Service Type</option>
+                        <option value="residential">Residential Construction</option>
+                        <option value="commercial">Commercial Projects</option>
+                        <option value="renovation">Renovation & Remodeling</option>
+                        <option value="design">Design & Planning</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Project Description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Project Budget (Optional)">
+                </div>
+                <button type="submit" class="primary-btn">Submit Quote Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,286 @@
+{
+  "contacts": [],
+  "quotes": [],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@example.com",
+      "password": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+      "phone": "(555) 123-4567",
+      "userType": "client",
+      "bio": "Looking for quality construction services",
+      "location": "New York, NY",
+      "created_at": "2025-07-19T12:39:35.928628"
+    },
+    {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane@example.com",
+      "password": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+      "phone": "(555) 234-5678",
+      "userType": "contractor",
+      "bio": "Professional contractor with 10+ years experience",
+      "location": "Los Angeles, CA",
+      "created_at": "2025-07-19T12:39:35.928674"
+    },
+    {
+      "id": 3,
+      "firstName": "Mike",
+      "lastName": "Johnson",
+      "email": "mike@example.com",
+      "password": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+      "phone": "(555) 345-6789",
+      "userType": "worker",
+      "bio": "Skilled carpenter and electrician",
+      "location": "Chicago, IL",
+      "created_at": "2025-07-19T12:39:35.928692"
+    },
+    {
+      "id": 4,
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "test@example.com",
+      "password": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+      "phone": "(555) 999-8888",
+      "userType": "client",
+      "bio": "",
+      "location": "",
+      "created_at": "2025-07-19T12:40:56.510069"
+    },
+    {
+      "id": 5,
+      "firstName": "Ayush",
+      "lastName": "Pancholi",
+      "email": "ayushpancholi3@gmail.com",
+      "password": "6e9f314571b5e8dad2517321c0e57c18f8c648e07ed107d37d9ff743fbcf6fc7",
+      "phone": "8320978291",
+      "userType": "client",
+      "bio": "",
+      "location": "",
+      "created_at": "2025-07-19T12:47:08.760612"
+    }
+  ],
+  "contractors": [
+    {
+      "id": 1,
+      "name": "ABC Construction Co.",
+      "email": "info@abcconstruction.com",
+      "phone": "(555) 123-4567",
+      "specialties": [
+        "residential",
+        "commercial"
+      ],
+      "rating": 4.8,
+      "experience_years": 15,
+      "completed_projects": 45,
+      "location": "New York, NY",
+      "description": "Leading construction company with 15+ years of experience in residential and commercial projects.",
+      "image_url": "/static/images/contractor1.jpg",
+      "status": "active",
+      "created_at": "2025-07-19T12:39:35.928707"
+    },
+    {
+      "id": 2,
+      "name": "Elite Builders LLC",
+      "email": "contact@elitebuilders.com",
+      "phone": "(555) 234-5678",
+      "specialties": [
+        "residential",
+        "renovation"
+      ],
+      "rating": 4.6,
+      "experience_years": 12,
+      "completed_projects": 38,
+      "location": "Los Angeles, CA",
+      "description": "Specialized in luxury residential construction and high-end renovations.",
+      "image_url": "/static/images/contractor2.jpg",
+      "status": "active",
+      "created_at": "2025-07-19T12:39:35.928718"
+    },
+    {
+      "id": 3,
+      "name": "Commercial Pro Builders",
+      "email": "info@commercialpro.com",
+      "phone": "(555) 345-6789",
+      "specialties": [
+        "commercial",
+        "industrial"
+      ],
+      "rating": 4.9,
+      "experience_years": 20,
+      "completed_projects": 67,
+      "location": "Chicago, IL",
+      "description": "Expert commercial and industrial construction with focus on large-scale projects.",
+      "image_url": "/static/images/contractor3.jpg",
+      "status": "active",
+      "created_at": "2025-07-19T12:39:35.928727"
+    }
+  ],
+  "workers": [
+    {
+      "id": 1,
+      "name": "John Smith",
+      "email": "john.smith@email.com",
+      "phone": "(555) 111-2222",
+      "specialties": [
+        "carpentry",
+        "electrical"
+      ],
+      "experience_years": 8,
+      "rating": 4.7,
+      "location": "New York, NY",
+      "hourly_rate": 45,
+      "availability": "full-time",
+      "contractor_id": 1,
+      "image_url": "/static/images/worker1.jpg",
+      "status": "available",
+      "created_at": "2025-07-19T12:39:35.928849"
+    },
+    {
+      "id": 2,
+      "name": "Maria Garcia",
+      "email": "maria.garcia@email.com",
+      "phone": "(555) 222-3333",
+      "specialties": [
+        "plumbing",
+        "hvac"
+      ],
+      "experience_years": 12,
+      "rating": 4.8,
+      "location": "Los Angeles, CA",
+      "hourly_rate": 55,
+      "availability": "full-time",
+      "contractor_id": 2,
+      "image_url": "/static/images/worker2.jpg",
+      "status": "available",
+      "created_at": "2025-07-19T12:39:35.928866"
+    },
+    {
+      "id": 3,
+      "name": "Mike Johnson",
+      "email": "mike.johnson@email.com",
+      "phone": "(555) 333-4444",
+      "specialties": [
+        "masonry",
+        "concrete"
+      ],
+      "experience_years": 15,
+      "rating": 4.9,
+      "location": "Chicago, IL",
+      "hourly_rate": 50,
+      "availability": "full-time",
+      "contractor_id": 3,
+      "image_url": "/static/images/worker3.jpg",
+      "status": "available",
+      "created_at": "2025-07-19T12:39:35.928877"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Modern Family Home",
+      "description": "3,200 sq ft custom home with smart home features",
+      "category": "residential",
+      "image_url": "/static/images/project1.jpg",
+      "size": "3,200 sq ft",
+      "location": "Suburban Area",
+      "budget": "$750,000",
+      "start_date": "2024-01-15",
+      "expected_completion": "2024-08-15",
+      "status": "in-progress",
+      "progress": 65,
+      "contractor_id": 1,
+      "assigned_workers": [
+        1,
+        2
+      ],
+      "client_name": "Sarah and Tom Wilson",
+      "client_email": "wilson.family@email.com",
+      "client_phone": "(555) 444-5555",
+      "created_at": "2025-07-19T12:39:35.928891"
+    },
+    {
+      "id": 2,
+      "title": "Office Complex",
+      "description": "15,000 sq ft modern office building",
+      "category": "commercial",
+      "image_url": "/static/images/project2.jpg",
+      "size": "15,000 sq ft",
+      "location": "Downtown",
+      "budget": "$2,500,000",
+      "start_date": "2024-03-01",
+      "expected_completion": "2024-12-01",
+      "status": "in-progress",
+      "progress": 40,
+      "contractor_id": 3,
+      "assigned_workers": [
+        3
+      ],
+      "client_name": "TechCorp Inc.",
+      "client_email": "projects@techcorp.com",
+      "client_phone": "(555) 555-6666",
+      "created_at": "2025-07-19T12:39:35.928904"
+    },
+    {
+      "id": 3,
+      "title": "Retail Center",
+      "description": "Multi-tenant retail development",
+      "category": "commercial",
+      "image_url": "/static/images/project3.jpg",
+      "size": "25,000 sq ft",
+      "location": "Shopping District",
+      "budget": "$3,200,000",
+      "start_date": "2024-02-01",
+      "expected_completion": "2024-10-01",
+      "status": "completed",
+      "progress": 100,
+      "contractor_id": 3,
+      "assigned_workers": [
+        1,
+        2,
+        3
+      ],
+      "client_name": "Mall Development Group",
+      "client_email": "info@malldev.com",
+      "client_phone": "(555) 666-7777",
+      "created_at": "2025-07-19T12:39:35.928915"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "name": "Residential Construction",
+      "description": "Custom homes, renovations, and additions tailored to your lifestyle.",
+      "icon": "fas fa-home",
+      "category": "residential",
+      "created_at": "2025-07-19T12:39:35.928927"
+    },
+    {
+      "id": 2,
+      "name": "Commercial Projects",
+      "description": "Office buildings, retail spaces, and industrial facilities.",
+      "icon": "fas fa-building",
+      "category": "commercial",
+      "created_at": "2025-07-19T12:39:35.928938"
+    },
+    {
+      "id": 3,
+      "name": "Renovation & Remodeling",
+      "description": "Transform your existing space with our renovation expertise.",
+      "icon": "fas fa-tools",
+      "category": "renovation",
+      "created_at": "2025-07-19T12:39:35.928947"
+    },
+    {
+      "id": 4,
+      "name": "Design & Planning",
+      "description": "Architectural design and project planning services.",
+      "icon": "fas fa-drafting-compass",
+      "category": "design",
+      "created_at": "2025-07-19T12:39:35.928958"
+    }
+  ]
+}

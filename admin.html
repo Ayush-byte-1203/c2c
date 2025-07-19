@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildPro Connect - Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .admin-header {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-nav button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            background: #e74c3c;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .admin-nav button:hover {
+            background: #c0392b;
+        }
+        
+        .admin-nav button.active {
+            background: #27ae60;
+        }
+        
+        .admin-section {
+            display: none;
+        }
+        
+        .admin-section.active {
+            display: block;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .status-approved {
+            background: #55a3ff;
+            color: white;
+        }
+        
+        .status-rejected {
+            background: #ff7675;
+            color: white;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .btn-approve {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-reject {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card p {
+            color: #666;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-hammer"></i> BuildPro Connect - Admin Panel</h1>
+            <p>Manage contacts, quotes, and projects</p>
+        </div>
+        
+        <div class="admin-nav">
+            <button onclick="showSection('dashboard')" class="active">Dashboard</button>
+            <button onclick="showSection('contacts')">Contacts</button>
+            <button onclick="showSection('quotes')">Quote Requests</button>
+            <button onclick="showSection('projects')">Projects</button>
+        </div>
+        
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="admin-section active">
+            <h2>Dashboard Overview</h2>
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be loaded here -->
+            </div>
+        </div>
+        
+        <!-- Contacts Section -->
+        <div id="contacts" class="admin-section">
+            <h2>Contact Submissions</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="contactsTable">
+                    <!-- Contacts will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Quotes Section -->
+        <div id="quotes" class="admin-section">
+            <h2>Quote Requests</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Service Type</th>
+                        <th>Budget</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="quotesTable">
+                    <!-- Quotes will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Projects Section -->
+        <div id="projects" class="admin-section">
+            <h2>Projects</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Size</th>
+                        <th>Location</th>
+                        <th>Completion Date</th>
+                        <th>Date Added</th>
+                    </tr>
+                </thead>
+                <tbody id="projectsTable">
+                    <!-- Projects will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Show/hide sections
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.admin-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Load data for the section
+            loadSectionData(sectionId);
+        }
+        
+        // Load data for different sections
+        async function loadSectionData(sectionId) {
+            try {
+                switch(sectionId) {
+                    case 'dashboard':
+                        await loadDashboard();
+                        break;
+                    case 'contacts':
+                        await loadContacts();
+                        break;
+                    case 'quotes':
+                        await loadQuotes();
+                        break;
+                    case 'projects':
+                        await loadProjects();
+                        break;
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+        
+        // Load dashboard stats
+        async function loadDashboard() {
+            try {
+                const response = await fetch('/api/stats');
+                const stats = await response.json();
+                
+                const statsGrid = document.getElementById('statsGrid');
+                statsGrid.innerHTML = `
+                    <div class="stat-card">
+                        <h3>${stats.total_projects}</h3>
+                        <p>Total Projects</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>${stats.total_quotes}</h3>
+                        <p>Quote Requests</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>${stats.total_contacts}</h3>
+                        <p>Contact Submissions</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>${stats.completed_projects}</h3>
+                        <p>Completed Projects</p>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+            }
+        }
+        
+        // Load contacts
+        async function loadContacts() {
+            try {
+                const response = await fetch('/api/admin/contacts');
+                const contacts = await response.json();
+                
+                const contactsTable = document.getElementById('contactsTable');
+                contactsTable.innerHTML = contacts.map(contact => `
+                    <tr>
+                        <td>${contact.name}</td>
+                        <td>${contact.email}</td>
+                        <td>${contact.phone || 'N/A'}</td>
+                        <td>${contact.message.substring(0, 100)}${contact.message.length > 100 ? '...' : ''}</td>
+                        <td>${new Date(contact.created_at).toLocaleDateString()}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading contacts:', error);
+            }
+        }
+        
+        // Load quotes
+        async function loadQuotes() {
+            try {
+                const response = await fetch('/api/admin/quotes');
+                const quotes = await response.json();
+                
+                const quotesTable = document.getElementById('quotesTable');
+                quotesTable.innerHTML = quotes.map(quote => `
+                    <tr>
+                        <td>${quote.name}</td>
+                        <td>${quote.email}</td>
+                        <td>${quote.phone}</td>
+                        <td>${quote.service_type}</td>
+                        <td>${quote.budget || 'N/A'}</td>
+                        <td><span class="status-badge status-${quote.status}">${quote.status}</span></td>
+                        <td>${new Date(quote.created_at).toLocaleDateString()}</td>
+                        <td>
+                            ${quote.status === 'pending' ? `
+                                <button class="action-btn btn-approve" onclick="updateQuoteStatus(${quote.id}, 'approved')">Approve</button>
+                                <button class="action-btn btn-reject" onclick="updateQuoteStatus(${quote.id}, 'rejected')">Reject</button>
+                            ` : ''}
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading quotes:', error);
+            }
+        }
+        
+        // Load projects
+        async function loadProjects() {
+            try {
+                const response = await fetch('/api/projects');
+                const projects = await response.json();
+                
+                const projectsTable = document.getElementById('projectsTable');
+                projectsTable.innerHTML = projects.map(project => `
+                    <tr>
+                        <td>${project.title}</td>
+                        <td>${project.category}</td>
+                        <td>${project.size || 'N/A'}</td>
+                        <td>${project.location || 'N/A'}</td>
+                        <td>${project.completion_date ? new Date(project.completion_date).toLocaleDateString() : 'In Progress'}</td>
+                        <td>${new Date(project.created_at).toLocaleDateString()}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading projects:', error);
+            }
+        }
+        
+        // Update quote status
+        async function updateQuoteStatus(quoteId, status) {
+            try {
+                const response = await fetch(`/api/admin/quote/${quoteId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status })
+                });
+                
+                if (response.ok) {
+                    alert('Quote status updated successfully!');
+                    loadQuotes(); // Reload the quotes table
+                } else {
+                    alert('Error updating quote status');
+                }
+            } catch (error) {
+                console.error('Error updating quote status:', error);
+                alert('Error updating quote status');
+            }
+        }
+        
+        // Load initial data
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboard();
+        });
+    </script>
+</body>
+</html> 

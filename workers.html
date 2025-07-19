@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workers - BuildPro Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .workers-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+        
+        .search-section {
+            background: #f8f9fa;
+            padding: 40px 0;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+        
+        .search-form input,
+        .search-form select {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .workers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .worker-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .worker-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .worker-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .worker-avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .worker-rating {
+            display: flex;
+            justify-content: center;
+            gap: 0.25rem;
+            margin: 0.5rem 0;
+        }
+        
+        .worker-rating i {
+            color: #ffd700;
+        }
+        
+        .worker-body {
+            padding: 1.5rem;
+        }
+        
+        .worker-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .specialty-tag {
+            background: #e74c3c;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .worker-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .worker-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .availability-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .available {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .busy {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .loading i {
+            font-size: 2rem;
+            color: #e74c3c;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-hammer"></i>
+                <span>BuildPro Connect</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contractors.html" class="nav-link">Contractors</a></li>
+                <li><a href="workers.html" class="nav-link active">Workers</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="workers-hero">
+        <div class="container">
+            <h1>Find Skilled Workers</h1>
+            <p>Connect with experienced construction workers for your projects</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <h2>Search Workers</h2>
+                <form class="search-form" id="searchForm">
+                    <input type="text" placeholder="Search by name" id="searchQuery">
+                    <select id="specialtyFilter">
+                        <option value="">All Specialties</option>
+                        <option value="carpentry">Carpentry</option>
+                        <option value="electrical">Electrical</option>
+                        <option value="plumbing">Plumbing</option>
+                        <option value="masonry">Masonry</option>
+                        <option value="hvac">HVAC</option>
+                        <option value="concrete">Concrete</option>
+                        <option value="painting">Painting</option>
+                        <option value="roofing">Roofing</option>
+                    </select>
+                    <input type="text" placeholder="Location" id="locationFilter">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workers Grid -->
+    <section class="workers">
+        <div class="container">
+            <div id="workersGrid" class="workers-grid">
+                <!-- Workers will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Worker Detail Modal -->
+    <div id="workerModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close" onclick="closeModal('workerModal')">&times;</span>
+            <div id="workerDetail">
+                <!-- Worker details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-hammer"></i>
+                        <span>BuildPro Connect</span>
+                    </div>
+                    <p>Connecting you with the best construction professionals.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contractors.html">Contractors</a></li>
+                        <li><a href="workers.html">Workers</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p>info@buildproconnect.com</p>
+                    <p>123 Construction Ave, Building City, BC 12345</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BuildPro Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allWorkers = [];
+        let filteredWorkers = [];
+
+        // Load workers on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadWorkers();
+            setupSearchForm();
+        });
+
+        // Load all workers
+        async function loadWorkers() {
+            try {
+                showLoading();
+                const response = await fetch('/api/workers');
+                allWorkers = await response.json();
+                filteredWorkers = [...allWorkers];
+                displayWorkers();
+            } catch (error) {
+                console.error('Error loading workers:', error);
+                showError('Failed to load workers');
+            }
+        }
+
+        // Display workers
+        function displayWorkers() {
+            const grid = document.getElementById('workersGrid');
+            
+            if (filteredWorkers.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                        <h3>No workers found</h3>
+                        <p>Try adjusting your search criteria</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredWorkers.map(worker => `
+                <div class="worker-card">
+                    <div class="worker-header">
+                        <div class="worker-avatar">
+                            <i class="fas fa-user-hard-hat"></i>
+                        </div>
+                        <h3>${worker.name}</h3>
+                        <div class="worker-rating">
+                            ${generateStars(worker.rating)}
+                            <span>(${worker.rating})</span>
+                        </div>
+                        <p>${worker.location}</p>
+                        <span class="availability-badge ${worker.status === 'available' ? 'available' : 'busy'}">
+                            ${worker.status === 'available' ? 'Available' : 'Busy'}
+                        </span>
+                    </div>
+                    <div class="worker-body">
+                        <div class="worker-specialties">
+                            ${worker.specialties.map(specialty => 
+                                `<span class="specialty-tag">${specialty}</span>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="worker-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">${worker.experience_years}</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">$${worker.hourly_rate}</div>
+                                <div class="stat-label">Hourly Rate</div>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Availability:</strong> ${worker.availability}</p>
+                        
+                        <div class="worker-actions">
+                            <button class="btn-primary" onclick="viewWorkerDetail(${worker.id})">
+                                View Details
+                            </button>
+                            <button class="btn-secondary" onclick="contactWorker(${worker.id})">
+                                Contact
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Generate star rating
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        // Setup search form
+        function setupSearchForm() {
+            document.getElementById('searchForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                filterWorkers();
+            });
+        }
+
+        // Filter workers
+        function filterWorkers() {
+            const query = document.getElementById('searchQuery').value.toLowerCase();
+            const specialty = document.getElementById('specialtyFilter').value;
+            const location = document.getElementById('locationFilter').value.toLowerCase();
+            
+            filteredWorkers = allWorkers.filter(worker => {
+                const matchesQuery = !query || 
+                    worker.name.toLowerCase().includes(query);
+                
+                const matchesSpecialty = !specialty || 
+                    worker.specialties.includes(specialty);
+                
+                const matchesLocation = !location || 
+                    worker.location.toLowerCase().includes(location);
+                
+                return matchesQuery && matchesSpecialty && matchesLocation;
+            });
+            
+            displayWorkers();
+        }
+
+        // View worker detail
+        async function viewWorkerDetail(workerId) {
+            try {
+                const response = await fetch(`/api/workers/${workerId}`);
+                const worker = await response.json();
+                
+                const projectsResponse = await fetch(`/api/workers/${workerId}/projects`);
+                const projects = await projectsResponse.json();
+                
+                displayWorkerDetail(worker, projects);
+                openModal('workerModal');
+            } catch (error) {
+                console.error('Error loading worker details:', error);
+                alert('Failed to load worker details');
+            }
+        }
+
+        // Display worker detail
+        function displayWorkerDetail(worker, projects) {
+            const detailDiv = document.getElementById('workerDetail');
+            
+            detailDiv.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h2>${worker.name}</h2>
+                        <div class="worker-rating" style="margin: 1rem 0;">
+                            ${generateStars(worker.rating)}
+                            <span>(${worker.rating})</span>
+                        </div>
+                        <p><strong>Location:</strong> ${worker.location}</p>
+                        <p><strong>Experience:</strong> ${worker.experience_years} years</p>
+                        <p><strong>Hourly Rate:</strong> $${worker.hourly_rate}/hour</p>
+                        <p><strong>Availability:</strong> ${worker.availability}</p>
+                        <p><strong>Status:</strong> 
+                            <span class="availability-badge ${worker.status === 'available' ? 'available' : 'busy'}">
+                                ${worker.status === 'available' ? 'Available' : 'Busy'}
+                            </span>
+                        </p>
+                        <p><strong>Email:</strong> ${worker.email}</p>
+                        <p><strong>Phone:</strong> ${worker.phone}</p>
+                        
+                        <h3>Specialties</h3>
+                        <div class="worker-specialties">
+                            ${worker.specialties.map(specialty => 
+                                `<span class="specialty-tag">${specialty}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3>Current Projects (${projects.length})</h3>
+                        ${projects.length > 0 ? projects.map(project => `
+                            <div style="background: #f8f9fa; padding: 1rem; margin: 1rem 0; border-radius: 5px;">
+                                <h4>${project.title}</h4>
+                                <p><strong>Status:</strong> ${project.status}</p>
+                                <p><strong>Progress:</strong> ${project.progress}%</p>
+                                <p><strong>Budget:</strong> ${project.budget}</p>
+                                <p><strong>Client:</strong> ${project.client_name}</p>
+                            </div>
+                        `).join('') : '<p>No current projects</p>'}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Contact worker
+        function contactWorker(workerId) {
+            // This would open a contact form or redirect to contact page
+            alert('Contact functionality would be implemented here');
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Loading and error functions
+        function showLoading() {
+            document.getElementById('workersGrid').innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading workers...</p>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('workersGrid').innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e74c3c; margin-bottom: 1rem;"></i>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+    </script>
+</body>
+</html> 

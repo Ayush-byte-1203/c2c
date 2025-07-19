@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - BuildPro Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .services-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            text-align: center;
+            font-size: 3rem;
+        }
+        
+        .service-body {
+            padding: 2rem;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-category {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .service-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .service-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .detail-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 0.5rem;
+        }
+        
+        .contractor-match {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .contractor-match h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contractor-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin: 0.5rem 0;
+        }
+        
+        .contractor-rating i {
+            color: #ffd700;
+        }
+        
+        .process-steps {
+            counter-reset: step-counter;
+        }
+        
+        .process-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding: 1rem 0 1rem 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .process-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            width: 2rem;
+            height: 2rem;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .process-step h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .process-step p {
+            color: #666;
+        }
+        
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .pricing-table th,
+        .pricing-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .pricing-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .pricing-table tr:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-hammer"></i>
+                <span>BuildPro Connect</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contractors.html" class="nav-link">Contractors</a></li>
+                <li><a href="workers.html" class="nav-link">Workers</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="services.html" class="nav-link active">Services</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="services-hero">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Comprehensive construction services tailored to your needs</p>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="services">
+        <div class="container">
+            <div id="servicesGrid" class="services-grid">
+                <!-- Services will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Detail Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content" style="max-width: 1000px; max-height: 90vh; overflow-y: auto;">
+            <span class="close" onclick="closeModal('serviceModal')">&times;</span>
+            <div id="serviceDetail">
+                <!-- Service details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-hammer"></i>
+                        <span>BuildPro Connect</span>
+                    </div>
+                    <p>Connecting you with the best construction professionals.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contractors.html">Contractors</a></li>
+                        <li><a href="workers.html">Workers</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p>info@buildproconnect.com</p>
+                    <p>123 Construction Ave, Building City, BC 12345</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BuildPro Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allServices = [];
+        let allContractors = [];
+
+        // Load services on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadServices();
+            loadContractors();
+        });
+
+        // Load all services
+        async function loadServices() {
+            try {
+                const response = await fetch('/api/services');
+                allServices = await response.json();
+                displayServices();
+            } catch (error) {
+                console.error('Error loading services:', error);
+                showError('Failed to load services');
+            }
+        }
+
+        // Load all contractors
+        async function loadContractors() {
+            try {
+                const response = await fetch('/api/contractors');
+                allContractors = await response.json();
+            } catch (error) {
+                console.error('Error loading contractors:', error);
+            }
+        }
+
+        // Display services
+        function displayServices() {
+            const grid = document.getElementById('servicesGrid');
+            
+            if (allServices.length === 0) {
+                grid.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: #666;">
+                        <i class="fas fa-tools" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                        <h3>No services available</h3>
+                        <p>Please check back later</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = allServices.map(service => `
+                <div class="service-card" onclick="viewServiceDetail(${service.id})">
+                    <div class="service-icon">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <div class="service-body">
+                        <span class="service-category">${service.category}</span>
+                        <h3 class="service-title">${service.name}</h3>
+                        <p class="service-description">${service.description}</p>
+                        
+                        <ul class="service-features">
+                            ${getServiceFeatures(service.category)}
+                        </ul>
+                        
+                        <div class="service-actions">
+                            <button class="btn-primary" onclick="event.stopPropagation(); viewServiceDetail(${service.id})">
+                                Learn More
+                            </button>
+                            <button class="btn-secondary" onclick="event.stopPropagation(); getQuote(${service.id})">
+                                Get Quote
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get service features based on category
+        function getServiceFeatures(category) {
+            const features = {
+                'residential': [
+                    'Custom home design',
+                    'Quality materials',
+                    'Timeline management',
+                    'Warranty coverage'
+                ],
+                'commercial': [
+                    'Large-scale projects',
+                    'Commercial permits',
+                    'Safety compliance',
+                    'Project management'
+                ],
+                'renovation': [
+                    'Existing structure analysis',
+                    'Minimal disruption',
+                    'Quality craftsmanship',
+                    'Budget optimization'
+                ],
+                'design': [
+                    'Architectural planning',
+                    '3D modeling',
+                    'Permit assistance',
+                    'Material selection'
+                ]
+            };
+            
+            return features[category] ? 
+                features[category].map(feature => `<li>${feature}</li>`).join('') :
+                '<li>Professional service</li><li>Quality guarantee</li><li>Timely completion</li>';
+        }
+
+        // View service detail
+        async function viewServiceDetail(serviceId) {
+            try {
+                const service = allServices.find(s => s.id === serviceId);
+                if (!service) {
+                    alert('Service not found');
+                    return;
+                }
+                
+                displayServiceDetail(service);
+                openModal('serviceModal');
+            } catch (error) {
+                console.error('Error loading service details:', error);
+                alert('Failed to load service details');
+            }
+        }
+
+        // Display service detail
+        function displayServiceDetail(service) {
+            const detailDiv = document.getElementById('serviceDetail');
+            
+            // Find contractors that offer this service
+            const matchingContractors = allContractors.filter(contractor => 
+                contractor.specialties.includes(service.category)
+            );
+            
+            detailDiv.innerHTML = `
+                <div class="service-detail-grid">
+                    <div>
+                        <div class="detail-section">
+                            <h3>Service Overview</h3>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border-radius: 10px; font-size: 2rem;">
+                                    <i class="${service.icon}"></i>
+                                </div>
+                                <div>
+                                    <h2>${service.name}</h2>
+                                    <span class="service-category">${service.category}</span>
+                                </div>
+                            </div>
+                            <p style="color: #666; line-height: 1.6;">${service.description}</p>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Our Process</h3>
+                            <div class="process-steps">
+                                <div class="process-step">
+                                    <h4>Initial Consultation</h4>
+                                    <p>We meet to understand your requirements and project scope</p>
+                                </div>
+                                <div class="process-step">
+                                    <h4>Planning & Design</h4>
+                                    <p>Detailed planning and design phase with your input</p>
+                                </div>
+                                <div class="process-step">
+                                    <h4>Execution</h4>
+                                    <p>Professional execution with quality control at every step</p>
+                                </div>
+                                <div class="process-step">
+                                    <h4>Completion & Handover</h4>
+                                    <p>Final inspection and handover with warranty coverage</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Service Features</h3>
+                            <ul class="service-features">
+                                ${getServiceFeatures(service.category)}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="detail-section">
+                            <h3>Pricing Guide</h3>
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th>Service Type</th>
+                                        <th>Starting Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${getPricingTable(service.category)}
+                                </tbody>
+                            </table>
+                            <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">
+                                *Prices are estimates and may vary based on project requirements
+                            </p>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Recommended Contractors</h3>
+                            ${matchingContractors.length > 0 ? 
+                                matchingContractors.slice(0, 3).map(contractor => `
+                                    <div class="contractor-match">
+                                        <h4>${contractor.name}</h4>
+                                        <div class="contractor-rating">
+                                            ${generateStars(contractor.rating)}
+                                            <span>(${contractor.rating})</span>
+                                        </div>
+                                        <p><strong>Experience:</strong> ${contractor.experience_years} years</p>
+                                        <p><strong>Projects:</strong> ${contractor.completed_projects} completed</p>
+                                        <p><strong>Location:</strong> ${contractor.location}</p>
+                                        <button class="btn-primary" style="margin-top: 0.5rem; width: 100%;" onclick="contactContractor(${contractor.id})">
+                                            Contact Contractor
+                                        </button>
+                                    </div>
+                                `).join('') : 
+                                '<p>No contractors available for this service at the moment.</p>'
+                            }
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Get Started</h3>
+                            <p>Ready to start your project? Contact us for a free consultation and quote.</p>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <button class="btn-primary" onclick="getQuote(${service.id})">
+                                    Get Free Quote
+                                </button>
+                                <button class="btn-secondary" onclick="contactUs()">
+                                    Contact Us
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Get pricing table based on service category
+        function getPricingTable(category) {
+            const pricing = {
+                'residential': [
+                    ['Custom Homes', '$200/sq ft'],
+                    ['Additions', '$150/sq ft'],
+                    ['Renovations', '$100/sq ft'],
+                    ['Kitchen Remodel', '$25,000+']
+                ],
+                'commercial': [
+                    ['Office Buildings', '$300/sq ft'],
+                    ['Retail Spaces', '$250/sq ft'],
+                    ['Industrial', '$200/sq ft'],
+                    ['Restaurants', '$400/sq ft']
+                ],
+                'renovation': [
+                    ['Kitchen', '$15,000+'],
+                    ['Bathroom', '$8,000+'],
+                    ['Basement', '$20,000+'],
+                    ['Whole House', '$50,000+']
+                ],
+                'design': [
+                    ['Architectural Design', '$5/sq ft'],
+                    ['3D Modeling', '$2,000+'],
+                    ['Permit Services', '$1,500+'],
+                    ['Consultation', '$150/hour']
+                ]
+            };
+            
+            return pricing[category] ? 
+                pricing[category].map(row => `
+                    <tr>
+                        <td>${row[0]}</td>
+                        <td>${row[1]}</td>
+                    </tr>
+                `).join('') :
+                '<tr><td>Custom Project</td><td>Contact for Quote</td></tr>';
+        }
+
+        // Generate star rating
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        // Get quote
+        function getQuote(serviceId) {
+            // This would open a quote form or redirect to quote page
+            alert('Quote functionality would be implemented here');
+        }
+
+        // Contact contractor
+        function contactContractor(contractorId) {
+            // This would open a contact form or redirect to contact page
+            alert('Contact functionality would be implemented here');
+        }
+
+        // Contact us
+        function contactUs() {
+            // This would open a contact form or redirect to contact page
+            alert('Contact functionality would be implemented here');
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Error function
+        function showError(message) {
+            document.getElementById('servicesGrid').innerHTML = `
+                <div style="text-align: center; padding: 3rem; color: #666;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e74c3c; margin-bottom: 1rem;"></i>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+    </script>
+</body>
+</html> 
